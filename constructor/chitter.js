@@ -1,4 +1,4 @@
-const {Client, Connection} = require('pg')
+const {Client} = require('pg')
 
 const client = new Client({
     "port": 5432, 
@@ -37,7 +37,6 @@ class soicalMedia {
     async newChitter(peep) {  
         try{
             await client.query('INSERT INTO chitter_messages (user_id, message, created_on) VALUES(DEFAULT, $1, current_timestamp)', [peep])  
-            console.log('yes its working')
             return true
         }
         catch(e) { 
@@ -62,7 +61,6 @@ class soicalMedia {
 
 Media = new soicalMedia  
 Media.start()
-
 
 module.exports = soicalMedia
 
