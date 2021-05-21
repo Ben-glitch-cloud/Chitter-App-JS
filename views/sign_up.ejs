@@ -9,7 +9,10 @@
 <body> 
     <header>
         <h1>Sign Up</h1>
-    </header>
+    </header> 
+    <section class="error">
+        <p><%= error %></p>
+    </section>
     <form action="/save_account" method="POST"> 
         <label for="name">name</label>
         <input type="text" name="name">   

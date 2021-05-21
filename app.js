@@ -64,13 +64,19 @@ app.get('/deleteChitter/:id', async function(res, req) {
 
 
 app.get('/sign_up', function(req, res) {
-    res.render('sign_up')
+    res.render('sign_up', {error: ''})
 }) 
 
 app.post('/save_account', async function(req, res) {
     try {
-        await Media.new_chitter_account(req.body.name, req.body.email, req.body.password) 
-        res.redirect('/')
+        let result = await Media.new_chitter_account(req.body.name, req.body.email, req.body.password)   
+        console.log(result)
+        if (result === 'error') {
+            res.render('sign_up', {error: 'Sorry this name or password has been used'})
+        } else {
+            res.redirect('/')
+        }
+        
     }
     catch(e) {
         console.log(e)

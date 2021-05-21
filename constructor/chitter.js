@@ -57,19 +57,20 @@ class soicalMedia {
     } 
 
     async new_chitter_account(name, email, password) { 
-        // let input = [] 
         try { 
-            // const results = await client.query('SELECT (name, email) FROM chitter_profile WHERE name = $1 OR email = $2 ', [name], [email]) 
-            // if (results === undefined) {
-            //     await client.query('INSERT INTO chitter_profile (name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password])  
-            //     console.log('Its working')
-            //     return true
-            // } else {  
-            //     console.log('it dident work')
-            //     return false 
-            // } 
-            await client.query('INSERT INTO chitter_profile (profile_id, name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password]) 
-            return true 
+            const results = await client.query('SELECT (name, email) FROM chitter_profile WHERE name = $1 OR email = $2 ', [name, email])  
+            if (results.rows.length === 0) {
+                await client.query('INSERT INTO chitter_profile (profile_id, name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password])   
+                console.log('New User add')
+                return true
+            } else {  
+                return 'error'
+            }  
+
+            // this works 
+
+            // await client.query('INSERT INTO chitter_profile (profile_id, name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password]) 
+            // return true 
         }
         catch(e) {
             console.log(e)  
