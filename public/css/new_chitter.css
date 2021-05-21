@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+}  
+
+/* header of the index page */
+
+header {
+    width: 100%; 
+    height: 80px; 
+    background: whitesmoke; 
+    border-bottom: 4px solid teal; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}  
+
+.header_item {
+    font-family: 'Lato', sans-serif;
+    font-size: 30px; 
+    color: teal;
+}   
+
+/* create new Peep */ 
+
+.main {
+    width: 100%; 
+    height: 600px;  
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column
+}  
+
+#error {
+    font-size: 20px;
+}
+
+.main_item  { 
+    font-family: 'Lato', sans-serif; 
+    margin: 0 0; 
+    padding: 0 0; 
+}
+
+#creat_new_peep {    
+    padding: 10px 10px;
+    margin: 0px 15px;  
+    background: lightgrey;
+    border: none;  
+    border-radius: 25px;
+    color: white; 
+    font-size: 18px; 
+} 
+
+#creat_new_peep:hover{
+    background: hotpink; 
+}

@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+}  
+
+/* header of the index page */
+
+header {
+    width: 100%; 
+    height: 80px; 
+    background: whitesmoke; 
+    border-bottom: 4px solid teal; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}  
+
+.header_item {
+    font-family: 'Lato', sans-serif;
+    font-size: 30px; 
+    color: teal;
+}  
+
+/* nav bar  */
+
+.nav {
+    width: 100%; 
+    height: 80px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}   
+
+.nav a {
+    text-decoration: none;
+}
+
+#new {
+    padding: 10px 15px;
+    background: whitesmoke; 
+    border-radius: 25px; 
+    font-family: 'Lato', sans-serif;
+    color: hotpink;
+} 
+
+#new:hover {
+    background: hotpink; 
+    color: white;
+}
+
+/* main body of the index page  */
+
+
+.main_body{
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+} 
+
+.main_body_item{
+    width: 550px; 
+    align-items: flex-start; 
+    padding: 10px 15px;
+    margin: 10px 10px; 
+    background: whitesmoke; 
+    box-shadow: 10px 10px 5px lightgrey;
+} 
+
+.main_body_item p {
+    padding: 5px 0px;
+    margin: 0 0; 
+} 
+
+#delete {
+    font-family: 'Lato', sans-serif; 
+    width: 90px; 
+    height: 40px; 
+    background: white; 
+    border-radius: 25px;
+    color: grey; 
+    border: none;   
+    padding: 0;
+    margin: 0px 0px;
+} 
+
+#delete:hover{
+    background: hotpink; 
+    color: white;
+}

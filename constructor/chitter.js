@@ -14,7 +14,7 @@ class soicalMedia {
     }
 
     async connect() {
-        try {
+        try { 
             await client.connect()
         } 
         catch(e) {
@@ -23,7 +23,6 @@ class soicalMedia {
     }
 
     async allChitter() {  
-
         try {
             const results = await client.query("SELECT * FROM chitter_messages;") 
             return results.rows.map((item) => ( {message_id: item.user_id, message: item.message, message_time: item.created_on} ))  
@@ -55,6 +54,27 @@ class soicalMedia {
             console.log(e)
             return false; 
         }
+    } 
+
+    async new_chitter_account(name, email, password) { 
+        // let input = [] 
+        try { 
+            // const results = await client.query('SELECT (name, email) FROM chitter_profile WHERE name = $1 OR email = $2 ', [name], [email]) 
+            // if (results === undefined) {
+            //     await client.query('INSERT INTO chitter_profile (name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password])  
+            //     console.log('Its working')
+            //     return true
+            // } else {  
+            //     console.log('it dident work')
+            //     return false 
+            // } 
+            await client.query('INSERT INTO chitter_profile (profile_id, name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password]) 
+            return true 
+        }
+        catch(e) {
+            console.log(e)  
+            return false
+        }
     }
 
 } 
@@ -65,3 +85,4 @@ Media.start()
 module.exports = soicalMedia
 
 
+// npm run devStart

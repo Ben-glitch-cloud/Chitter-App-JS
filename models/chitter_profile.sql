@@ -3,4 +3,6 @@ CREATE TABLE chitter_profile (
             name VARCHAR(25) NOT NULL, 
             email VARCHAR(25) NOT NULL,  
             password VARCHAR(45) NOT NULL 
-        ); 
+        );  
+
+        
