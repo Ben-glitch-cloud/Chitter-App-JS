@@ -18,8 +18,22 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));  
 
 
+app.get('/', function (req, res) { 
+    res.render('login', {error: ''})
+}) 
+
+// User logging
+app.post('/logging_in', async function(res, req) { 
+   const result = await Media.logging_in(res.body.username, res.body.password)  
+    if (result === true) {
+        req.redirect('/all_peep')
+    } else {
+        req.render('login', { error: 'Username or Password is incorrect'})
+    }
+})
+
 // get the main page  
-app.get('/', async function(req, res){  
+app.get('/all_Peep', async function(req, res){  
     const result = await Media.allChitter()
     res.render('index', {result: result})
 }) 
@@ -37,7 +51,7 @@ app.post('/newchitter', async function(res, req) {
         
         if (peep.length > 0) {
             await Media.newChitter(peep)    
-            req.redirect('/')
+            req.redirect('/all_Peep')
         } else {  
             console.log('working fine')    
             req.render('chitterpost', { error: 'Make sure to write a peep:)' })
@@ -54,7 +68,7 @@ app.get('/deleteChitter/:id', async function(res, req) {
     try { 
         const message_id = res.params.id     
         await Media.deleteChitter(message_id) 
-        req.redirect('/')
+        req.redirect('/all_Peep')
     } 
     catch(e) {
         console.log(e)
@@ -74,7 +88,7 @@ app.post('/save_account', async function(req, res) {
         if (result === 'error') {
             res.render('sign_up', {error: 'Sorry this name or password has been used'})
         } else {
-            res.redirect('/')
+            res.redirect('/all_Peep')
         }
         
     }

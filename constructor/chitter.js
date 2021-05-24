@@ -3,7 +3,6 @@ const {Client} = require('pg')
 const client = new Client({
     "port": 5432, 
     "database": "chitter_js", 
-    
 })   
 
 class soicalMedia {    
@@ -56,6 +55,21 @@ class soicalMedia {
         }
     } 
 
+    async logging_in(username, password) { 
+        try{
+            const result = await client.query('SELECT (name, password) FROM chitter_profile WHERE name = $1 AND password = $2', [username, password])
+            if (result.rows.length === 1) {
+                return true
+            } else {
+                return 'error'
+            }
+        } 
+        catch(e) {
+            console.log(e) 
+            return false
+        }
+    }
+
     async new_chitter_account(name, email, password) { 
         try { 
             const results = await client.query('SELECT (name, email) FROM chitter_profile WHERE name = $1 OR email = $2 ', [name, email])  
@@ -66,11 +80,6 @@ class soicalMedia {
             } else {  
                 return 'error'
             }  
-
-            // this works 
-
-            // await client.query('INSERT INTO chitter_profile (profile_id, name, email, password) VALUES(DEFAULT, $1, $2, $3)', [name, email, password]) 
-            // return true 
         }
         catch(e) {
             console.log(e)  
