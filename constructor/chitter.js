@@ -24,7 +24,7 @@ class soicalMedia {
     async allChitter() {  
         try {
             const results = await client.query("SELECT * FROM chitter_messages;") 
-            return results.rows.map((item) => ( {message_id: item.user_id, message: item.message, message_time: item.created_on} ))  
+            return results.rows.map((item) => ( {message_id: item.user_id, message: item.message, message_time: item.created_on, chitter_id: item.chitter_profile} ))  
         }
         catch(e) {
             return []; 
@@ -32,9 +32,9 @@ class soicalMedia {
 
     }  
 
-    async newChitter(peep) {  
+    async newChitter(peep, id) {  
         try{
-            await client.query('INSERT INTO chitter_messages (user_id, message, created_on) VALUES(DEFAULT, $1, current_timestamp)', [peep])  
+            await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', [peep, id])  
             return true
         }
         catch(e) { 
@@ -59,7 +59,7 @@ class soicalMedia {
         try{
             const result = await client.query('SELECT (name, password) FROM chitter_profile WHERE name = $1 AND password = $2', [username, password])
             if (result.rows.length === 1) {
-                return true
+                return await client.query('SELECT profile_id FROM chitter_profile WHERE name = $1 AND password = $2', [username, password] )
             } else {
                 return 'error'
             }

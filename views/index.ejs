@@ -13,17 +13,21 @@
         </header> 
 
         <section class="nav">
-            <a href="./newPeep" id="new">New Peep</a>
+            <a href="/newPeep" id="new">New Peep</a>
         </section>
 
     <section class="main_body">
         <% result.reverse().forEach(item => { %> 
             <div class="main_body_item">
                 <p><%= item.message %></p> 
-                <p><%= item.message_time.toString().split(' ').slice(2, 5).join('-') %></p> 
-                <form action='/deleteChitter/<%= item.message_id %>' method="GET" id="delete"> 
-                    <input type="submit" value="Delete" id="delete" >
-                </form> 
+                <p><%= item.message_time.toString().split(' ').slice(2, 5).join('-') %></p>  
+                <% if (Number(item.chitter_id) === profile_id ) { %>
+                    <form action='/deleteChitter/<%= item.message_id %>' method="GET" id="delete"> 
+                        <input type="submit" value="Delete" id="delete" >
+                    </form>  
+                <% } else { %>  
+                    <%  %>
+                <% } %>
             </div>
         <% }) %>
     </section> 

@@ -5,4 +5,4 @@ CREATE TABLE chitter_profile (
             password VARCHAR(45) NOT NULL 
         );  
 
-        
+      

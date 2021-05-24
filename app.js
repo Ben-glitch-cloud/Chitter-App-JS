@@ -5,7 +5,9 @@ var fs = require('fs')
 
 let Media = new soicalMedia    
 
-const express = require('express')  
+const express = require('express')   
+var session = require('express-session') 
+
 const { render } = require('ejs')
 const app = express()  
 app.use(express.json())
@@ -14,7 +16,11 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');  
 // app.use(express.urlencoded({ extrended: false }));  
 app.use(express.urlencoded({ extended: true }))
-
+app.use(session({
+    secret: 'secret-key', 
+    resave: false, 
+    saveUninitialized: false,
+})); 
 app.use(express.static('public'));  
 
 
@@ -24,8 +30,11 @@ app.get('/', function (req, res) {
 
 // User logging
 app.post('/logging_in', async function(res, req) { 
-   const result = await Media.logging_in(res.body.username, res.body.password)  
-    if (result === true) {
+   const result = await Media.logging_in(res.body.username, res.body.password)   
+
+    session.id = result.rows[0].profile_id
+
+    if (result.rows.length === 1) {
         req.redirect('/all_peep')
     } else {
         req.render('login', { error: 'Username or Password is incorrect'})
@@ -33,9 +42,11 @@ app.post('/logging_in', async function(res, req) {
 })
 
 // get the main page  
-app.get('/all_Peep', async function(req, res){  
-    const result = await Media.allChitter()
-    res.render('index', {result: result})
+app.get('/all_Peep', async function(req, res){   
+    // here is where I can but the sessions id for now:)
+    const result = await Media.allChitter() 
+    // to add to
+    res.render('index', {result: result, profile_id: session.id })
 }) 
 
 // get the chitter post page
@@ -47,10 +58,9 @@ app.get('/newPeep', function(req, res){
 // reseve new peep from chitter
 app.post('/newchitter', async function(res, req) {   
     try {  
-        const peep = res.body.peep  
-        
+        const peep = res.body.peep   
         if (peep.length > 0) {
-            await Media.newChitter(peep)    
+            await Media.newChitter(peep, session.id)    
             req.redirect('/all_Peep')
         } else {  
             console.log('working fine')    
@@ -82,14 +92,20 @@ app.get('/sign_up', function(req, res) {
 }) 
 
 app.post('/save_account', async function(req, res) {
-    try {
-        let result = await Media.new_chitter_account(req.body.name, req.body.email, req.body.password)   
-        console.log(result)
-        if (result === 'error') {
-            res.render('sign_up', {error: 'Sorry this name or password has been used'})
+    try { 
+        if (req.body.name.indexOf(' ') === 0) {
+        let result = await Media.new_chitter_account(req.body.name, req.body.email, req.body.password)    
+
+            if (result === 'error') {
+                res.render('sign_up', {error: 'Sorry this name or password has been used'})
+            } else {
+                res.redirect('/all_Peep')
+            }
+
         } else {
-            res.redirect('/all_Peep')
+            res.render('sign_up', {error: 'Sorry, the Username cannot have spaces.'})
         }
+        
         
     }
     catch(e) {

@@ -2,6 +2,8 @@
 
 CREATE TABLE chitter_messages ( user_id serial PRIMARY KEY, message VARCHAR ( 100 ) NOT NULL, created_on TIMESTAMP NOT NULL);   
 
+ALTER TABLE chitter_messages ADD COLUMN chitter_profile VARCHAR
+
 -- First insert into table 
 
 INSERT INTO chitter_messages(user_id, message, created_on) VALUES (DEFAULT, 'This is my first message in JS', current_timestamp); 
