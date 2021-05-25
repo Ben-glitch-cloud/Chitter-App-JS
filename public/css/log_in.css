@@ -48,39 +48,41 @@ header {
 #new:hover {
     background: hotpink; 
     color: white;
+} 
+
+.main_body_error{
+    height: 40px; 
+    font-family: 'Lato', sans-serif;   
+    color: hotpink;
 }
 
-/* main body of the index page  */
 
+/* main body  */
 
 .main_body{
     width: 100%; 
+    height: 400px; 
     display: flex; 
-    flex-direction: column; 
     justify-content: center; 
-    align-items: center;
-    font-family: 'Lato', sans-serif;
-} 
+    align-items: center; 
+    flex-direction: column; 
+    margin: 0 0;
+    padding: 0 0; 
+}  
 
 .main_body_item{
-    width: 550px; 
-    align-items: flex-start; 
-    padding: 10px 15px;
-    margin: 10px 10px; 
-    background: whitesmoke; 
-    box-shadow: 10px 10px 5px lightgrey;
+    margin: 25px 0px; 
+    padding: 0 0; 
+    font-family: 'Lato', sans-serif;   
+    width: 270px;
+
 } 
 
-.main_body_item p {
-    padding: 5px 0px;
-    margin: 0 0; 
-} 
-
-#delete {
+#sub{
     font-family: 'Lato', sans-serif; 
     width: 90px; 
     height: 40px; 
-    background: white; 
+    background: whitesmoke; 
     border-radius: 25px;
     color: grey; 
     border: none;   
@@ -88,7 +90,7 @@ header {
     margin: 0px 0px;
 } 
 
-#delete:hover{
+#sub:hover{
     background: hotpink; 
     color: white;
 }

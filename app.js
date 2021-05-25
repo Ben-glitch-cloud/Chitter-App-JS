@@ -31,13 +31,11 @@ app.get('/', function (req, res) {
 // User logging
 app.post('/logging_in', async function(res, req) { 
    const result = await Media.logging_in(res.body.username, res.body.password)   
-
-    session.id = result.rows[0].profile_id
-
-    if (result.rows.length === 1) {
-        req.redirect('/all_peep')
-    } else {
+    if (result === 'error') { 
         req.render('login', { error: 'Username or Password is incorrect'})
+    } else { 
+        session.id = result.rows[0].profile_id
+        req.redirect('/all_peep')
     }
 })
 
@@ -60,7 +58,9 @@ app.post('/newchitter', async function(res, req) {
     try {  
         const peep = res.body.peep   
         if (peep.length > 0) {
-            await Media.newChitter(peep, session.id)    
+            await Media.newChitter(peep, session.id)   
+            Media.email(peep)  
+            // here is where the ppep should go into emails
             req.redirect('/all_Peep')
         } else {  
             console.log('working fine')    
@@ -92,18 +92,23 @@ app.get('/sign_up', function(req, res) {
 }) 
 
 app.post('/save_account', async function(req, res) {
-    try { 
-        if (req.body.name.indexOf(' ') === 0) {
+    try {   
+        // look at this later
+        console.log(req.body.name.indexOf(' ')) 
+
+        if (req.body.name.indexOf(' ') < 0 && req.body.name.length !== 0 || req.body.email.length !== 0 || req.body.password.length !== 0) {
         let result = await Media.new_chitter_account(req.body.name, req.body.email, req.body.password)    
 
             if (result === 'error') {
                 res.render('sign_up', {error: 'Sorry this name or password has been used'})
             } else {
-                res.redirect('/all_Peep')
+                res.redirect('/')
             }
 
-        } else {
+        } else if (req.body.name.length !== 0 || req.body.email.length !== 0 || req.body.password.length !== 0) {
             res.render('sign_up', {error: 'Sorry, the Username cannot have spaces.'})
+        } else {
+            res.render('sign_up', {error: 'Use must fill in the name, email and password'})
         }
         
         

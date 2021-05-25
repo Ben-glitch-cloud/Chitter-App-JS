@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="/css/log_in.css">
     <title>Log_in</title>
 </head>
     <body>
-        <header>
-            <h1>Login</h1>
+        <header> 
+                <h1 class="header_item">Login</h1>
         </header>   
-        <section>
-            <a href="/sign_up">Sign Up</a>
+        <section class="nav">
+            <a id="new" href="/sign_up">Sign Up</a>
         </section>
-        <div>
-            <p><%= error %></p>
-        </div>
-        <section>
-            <form action="/logging_in" method="POST">  
-                <label for="username">username</label>
-                <input type="text" name="username">   
-                <br>
-                <label for="password">password</label>
-                <input type="text" name="password">  
-                <br>
-                <input type="submit" name="submit">
-            </form>
+        <section class="main_body"> 
+
+                <form class="form" action="/logging_in" method="POST">    
+                    <div class="main_body_error">
+                        <p><%= error %></p>
+                    </div>
+                    <div class="main_body_item">
+                        <label for="username">Username</label>
+                        <input type="text" name="username">   
+                    </div>
+                    <div class="main_body_item">
+                        <label for="password">Password</label>
+                        <input type="text" name="password">  
+                    </div>
+                    <div class="main_body_item">
+                        <input id="sub" type="submit" name="submit">  
+                    </div>
+                </form> 
+
         </section>
     </body>
 </html>

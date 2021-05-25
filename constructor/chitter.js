@@ -3,7 +3,10 @@ const {Client} = require('pg')
 const client = new Client({
     "port": 5432, 
     "database": "chitter_js", 
-})   
+})    
+
+
+
 
 class soicalMedia {    
 
@@ -33,8 +36,8 @@ class soicalMedia {
     }  
 
     async newChitter(peep, id) {  
-        try{
-            await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', [peep, id])  
+        try{ 
+            await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', [peep, id])   
             return true
         }
         catch(e) { 
@@ -57,9 +60,9 @@ class soicalMedia {
 
     async logging_in(username, password) { 
         try{
-            const result = await client.query('SELECT (name, password) FROM chitter_profile WHERE name = $1 AND password = $2', [username, password])
+            const result = await client.query('SELECT (name, password) FROM chitter_profile WHERE name = $1 AND password = $2', [username, password]) 
             if (result.rows.length === 1) {
-                return await client.query('SELECT profile_id FROM chitter_profile WHERE name = $1 AND password = $2', [username, password] )
+                return await client.query('SELECT profile_id FROM chitter_profile WHERE name = $1 AND password = $2', [username, password] ) 
             } else {
                 return 'error'
             }
@@ -85,11 +88,29 @@ class soicalMedia {
             console.log(e)  
             return false
         }
+    } 
+ 
+    async email(peep) { 
+        // for some resion async doesent work in this funaction
+        try {
+            peep.split(' ').forEach(item => {
+                if (item.includes('@')) { 
+                    let username = item.substring(1)
+                    const results = client.query('SELECT name FROM chitter_profile WHERE name = $1', [username])   
+                    console.log(results)
+                }
+            }) 
+        }
+        catch(e) {
+            console.log(e) 
+            return false
+        } 
     }
 
-} 
+}  
 
 Media = new soicalMedia  
+
 Media.start()
 
 module.exports = soicalMedia

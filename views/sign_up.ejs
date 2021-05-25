@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="/css/sign_up.css">
     <title>Document</title>
 </head>
 <body> 
     <header>
-        <h1>Sign Up</h1>
-    </header> 
-    <section class="error">
-        <p><%= error %></p>
-    </section>
-    <form action="/save_account" method="POST"> 
-        <label for="name">name</label>
-        <input type="text" name="name">   
-        <br>
-        <label for="password">Email</label>
-        <input type="text" name="email"> 
-        <br>
-        <label for="password">password</label>
-        <input type="text" name="password"> 
-        <br>
-        <input type="submit" value="submit">
-    </form>
+        <h1 class="header_item">Sign Up</h1>
+    </header>  
+    <div class="nav">
+        <a id="new" href="/">Login</a>
+    </div>
+
+    <section class="sign_up">
+    <form action="/save_account" method="POST">  
+        <div class="error">
+            <p><%= error %></p>
+        </div>
+        <div class="sign_up_item">
+            <label for="name">Name</label>
+            <input type="text" name="name">   
+        </div>
+        <div class="sign_up_item">
+            <label for="password">Email</label>
+            <input type="text" name="email"> 
+        </div>
+        <div class="sign_up_item">
+            <label for="password">Password</label>
+            <input type="text" name="password"> 
+        </div>
+        <div class="sign_up_item">
+            <input id="sign" type="submit" value="submit"> 
+        </div>
+    </form> 
+</section>
 </body>
 </html>
