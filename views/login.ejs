@@ -15,24 +15,28 @@
             <a id="new" href="/sign_up">Sign Up</a>
         </section>
         <section class="main_body"> 
-
+            <div class="main_body_background">
                 <form class="form" action="/logging_in" method="POST">    
+                     
                     <div class="main_body_error">
                         <p><%= error %></p>
-                    </div>
-                    <div class="main_body_item">
-                        <label for="username">Username</label>
-                        <input type="text" name="username">   
-                    </div>
-                    <div class="main_body_item">
-                        <label for="password">Password</label>
-                        <input type="text" name="password">  
-                    </div>
-                    <div class="main_body_item">
-                        <input id="sub" type="submit" name="submit">  
+                    </div> 
+
+                    <div class="main_body_item"> 
+                        <div class="main_body_item_form">
+                            <label for="username">Username</label>
+                            <input type="text" name="username">    
+                        </div> 
+                        <div class="main_body_item_form">
+                            <label for="password">Password</label>
+                            <input type="text" name="password">   
+                        </div> 
+                        <div class="main_body_item_form">
+                            <input id="sub" type="submit" name="submit">   
+                        </div>
                     </div>
                 </form> 
-
+            </div>
         </section>
     </body>
 </html>

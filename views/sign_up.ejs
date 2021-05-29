@@ -16,24 +16,28 @@
     </div>
 
     <section class="sign_up">
-    <form action="/save_account" method="POST">  
+    <form action="/save_account" method="POST">   
+
         <div class="error">
             <p><%= error %></p>
-        </div>
-        <div class="sign_up_item">
-            <label for="name">Name</label>
-            <input type="text" name="name">   
-        </div>
-        <div class="sign_up_item">
-            <label for="password">Email</label>
-            <input type="text" name="email"> 
-        </div>
-        <div class="sign_up_item">
-            <label for="password">Password</label>
-            <input type="text" name="password"> 
-        </div>
-        <div class="sign_up_item">
-            <input id="sign" type="submit" value="submit"> 
+        </div> 
+        
+        <div class="sign_up_item"> 
+            <div class="sign_up_item_style">
+                <label for="name">Name</label>
+                <input type="text" name="name">   
+            </div> 
+            <div class="sign_up_item_style">
+                <label for="password">Email</label>
+                <input type="text" name="email"> 
+            </div>  
+            <div class="sign_up_item_style">
+                <label for="password">Password</label>
+                <input type="text" name="password"> 
+            </div> 
+                <div class="sign_up_item_style"></div>
+                <input id="sign" type="submit" value="submit">  
+            </div>
         </div>
     </form> 
 </section>

@@ -1,14 +1,19 @@
-const {Client} = require('pg')
-
-const client = new Client({
-    "port": 5432, 
-    "database": "chitter_js", 
-})    
+const {Client} = require('pg')  
+const sgMail = require('@sendgrid/mail') 
 
 
+    const client_one = new Client({
+        "port": 5432, 
+        "database": "chitter_js_test"
+    }); 
 
+    const client = new Client({
+        "port": 5432, 
+        "database": "chitter_js"
+    });      
 
 class soicalMedia {    
+    
 
     async start() { 
         const soical = new soicalMedia 
@@ -16,8 +21,15 @@ class soicalMedia {
     }
 
     async connect() {
-        try { 
-            await client.connect()
+        try {    
+            if (process.env.NODE_ENV === 'test') {  
+                console.log('connecting to test_database') 
+                await client_one.connect()   
+                console.log('connect made')
+            } else { 
+                console.log('connecting to database')
+                await client.connect()    
+            } 
         } 
         catch(e) {
             console.log(`Failed to connect ${e}`)
@@ -25,8 +37,8 @@ class soicalMedia {
     }
 
     async allChitter() {  
-        try {
-            const results = await client.query("SELECT * FROM chitter_messages;") 
+        try { 
+            const results = await client.query("SELECT * FROM chitter_messages;")  
             return results.rows.map((item) => ( {message_id: item.user_id, message: item.message, message_time: item.created_on, chitter_id: item.chitter_profile} ))  
         }
         catch(e) {
@@ -38,6 +50,7 @@ class soicalMedia {
     async newChitter(peep, id) {  
         try{ 
             await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', [peep, id])   
+            await Media.email(peep) 
             return true
         }
         catch(e) { 
@@ -93,27 +106,57 @@ class soicalMedia {
     async email(peep) { 
         // for some resion async doesent work in this funaction
         try {
-            peep.split(' ').forEach(item => {
+            peep.split(' ').forEach(async item => {
                 if (item.includes('@')) { 
-                    let username = item.substring(1)
-                    const results = client.query('SELECT name FROM chitter_profile WHERE name = $1', [username])   
-                    console.log(results)
-                }
+                    const email = await client.query('SELECT email FROM chitter_profile WHERE name = $1', [item.substring(1)])   
+                    await Media.send_email(email.rows)    
+                    return true
+                }  
             }) 
         }
         catch(e) {
             console.log(e) 
             return false
         } 
+    }   
+    
+    
+    async send_email(email) {
+        try {
+            console.log(email)  
+            console.log(process.env.SENDGRID_API_KEY) 
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+            const msg = { 
+                // email address
+                to: '', 
+                from: '',
+                subject: 'Someone is talking about you on chitter',
+                text: "Login in to chitter and see who's talking about",
+                html: '<strong>and easy to do anywhere, even with Node.js</strong>', 
+            } 
+            sgMail
+            .send(msg)
+            .then(() => {
+            console.log('Email sent')
+            }) 
+            .catch((error) => {
+                console.error(error.response.body)
+            }) 
+            return true  
+        } 
+        catch(e) {
+            console.log(e) 
+            return false
+        }
     }
+
 
 }  
 
 Media = new soicalMedia  
-
-Media.start()
+Media.start() 
 
 module.exports = soicalMedia
 
 
-// npm run devStart
+//to run the web app npm run devStart 

@@ -61,8 +61,17 @@ header {
 .error{
     height: 30px; 
     font-family: 'Lato', sans-serif;  
-    color: hotpink;
+    color: hotpink; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    padding: 10px 10px; 
+    margin-bottom: 20px;
+} 
 
+.error p {
+    margin: 0;
+    padding: 0;
 }
 
 .sign_up {
@@ -74,10 +83,17 @@ header {
 } 
 
 .sign_up_item{
-   margin: 20px 0; 
    font-family: 'Lato', sans-serif;  
-   width: 350px; 
-} 
+   width: 350px;  
+   background: teal; 
+   padding: 15px 20px; 
+   border-radius: 25px; 
+   color: white;
+}  
+
+.sign_up_item_style{
+    padding: 10px 0px; 
+}
 
 #sign{
     font-family: 'Lato', sans-serif; 

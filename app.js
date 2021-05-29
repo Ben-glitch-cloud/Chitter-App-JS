@@ -43,7 +43,7 @@ app.post('/logging_in', async function(res, req) {
 app.get('/all_Peep', async function(req, res){   
     // here is where I can but the sessions id for now:)
     const result = await Media.allChitter() 
-    // to add to
+    // to add to 
     res.render('index', {result: result, profile_id: session.id })
 }) 
 
@@ -59,8 +59,9 @@ app.post('/newchitter', async function(res, req) {
         const peep = res.body.peep   
         if (peep.length > 0) {
             await Media.newChitter(peep, session.id)   
-            Media.email(peep)  
-            // here is where the ppep should go into emails
+            // await Media.email(peep)  
+            // here is where the ppep should go into emails 
+            console.log('adding new peep')
             req.redirect('/all_Peep')
         } else {  
             console.log('working fine')    

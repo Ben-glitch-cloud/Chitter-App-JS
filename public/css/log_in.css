@@ -53,9 +53,19 @@ header {
 .main_body_error{
     height: 40px; 
     font-family: 'Lato', sans-serif;   
-    color: hotpink;
+    color: hotpink; 
+    background: white; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 25px;
 }
+ 
 
+.main_body_error p {
+    padding: 0;
+    margin: 0;
+}
 
 /* main body  */
 
@@ -68,15 +78,23 @@ header {
     flex-direction: column; 
     margin: 0 0;
     padding: 0 0; 
-}  
+}   
 
-.main_body_item{
+
+
+.main_body_item{   
+    color: white;
+    background: teal;  
+    border-radius: 25px;
+    padding: 20px 20px;
     margin: 25px 0px; 
-    padding: 0 0; 
     font-family: 'Lato', sans-serif;   
     width: 270px;
+}  
 
-} 
+.main_body_item_form{
+    padding: 10px 0px;
+}
 
 #sub{
     font-family: 'Lato', sans-serif; 
