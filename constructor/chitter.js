@@ -1,18 +1,11 @@
 const {Client} = require('pg')  
 const sgMail = require('@sendgrid/mail') 
+ 
 
+    let client;  
+ 
 
-    const client_one = new Client({
-        "port": 5432, 
-        "database": "chitter_js_test"
-    }); 
-
-    const client = new Client({
-        "port": 5432, 
-        "database": "chitter_js"
-    });      
-
-class soicalMedia {    
+class soicalMedia {     
     
 
     async start() { 
@@ -22,13 +15,24 @@ class soicalMedia {
 
     async connect() {
         try {    
-            if (process.env.NODE_ENV === 'test') {  
-                console.log('connecting to test_database') 
-                await client_one.connect()   
-                console.log('connect made')
+            if (process.env.NODE_ENV === 'test') {   
+
+                console.log('connecting to test_database')   
+                const test = new Client({
+                    "port": 5432, 
+                    "database": "chitter_js_test"
+                });   
+                await test.connect()    
+                
+                client = test 
             } else { 
-                console.log('connecting to database')
-                await client.connect()    
+                console.log('connecting to database')  
+                const prod = new Client({
+                    "port": 5432, 
+                    "database": "chitter_js"
+                }); 
+                await prod.connect()     
+                client = prod 
             } 
         } 
         catch(e) {
@@ -37,8 +41,8 @@ class soicalMedia {
     }
 
     async allChitter() {  
-        try { 
-            const results = await client.query("SELECT * FROM chitter_messages;")  
+        try {   
+            const results = await client.query('SELECT * FROM chitter_messages;')     
             return results.rows.map((item) => ( {message_id: item.user_id, message: item.message, message_time: item.created_on, chitter_id: item.chitter_profile} ))  
         }
         catch(e) {
