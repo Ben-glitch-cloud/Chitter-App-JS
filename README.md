@@ -1,5 +1,8 @@
-<h1 align="center">Chitter-App-JS</h1>
-<p align="center">🏗Currenty under Constraction🚧</p>
+<h1 align="center">Chitter-App-JS</h1> 
+
+<p align="center"><img width="30%" src="https://user-images.githubusercontent.com/71974361/120532902-18b80f00-c3d8-11eb-8cbd-f015180b17b1.gif"></img></p>
+
+<p align="center">More info coming soon to the project</p>
 
 <h2>User Stors</h2> 
 
