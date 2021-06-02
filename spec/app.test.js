@@ -23,6 +23,7 @@ describe('connecting to test database', async() => {
 
 describe('peeps', async() => {
 
+    // work on this area later
     test('Out put all Peeps inside the database', async() =>{
         Media = new soicalMedia  
         await Media.connect()   
@@ -32,21 +33,21 @@ describe('peeps', async() => {
         Media.newChitter('Working out how to use SQL in JS', 3)   
         const result = await Media.allChitter()  
         expect( result.map((item) => (item.message))).toEqual(['This is my first message in JS', 'Working with express this time', 'Working out how to use SQL in JS']) 
-    }, 1000) 
+    }) 
 
     test('adding a new peep to Chitter', async() => {
         Media = new soicalMedia 
         await Media.newChitter('Testing my app with Jest and Jasmine', 4)  
         const result = await Media.allChitter()
         expect( result.map((item) => (item.message))).toEqual(["This is my first message in JS", "Working with express this time", "Working out how to use SQL in JS", "Testing my app with Jest and Jasmine"]) 
-    }, 1000) 
+    }) 
 
     test('deleting peep from chitter', async() => {
         Media = new soicalMedia 
         await Media.deleteChitter(1) 
         const result = await Media.allChitter() 
         expect( result.map((item) => (item.message))).toEqual(["Working with express this time", "Working out how to use SQL in JS", "Testing my app with Jest and Jasmine"])
-    }, 1000) 
+    }) 
 
     // test('rase an error create new peep when id is missing', async() => { 
     //     Media = new soicalMedia 
