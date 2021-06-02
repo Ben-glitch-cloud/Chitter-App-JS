@@ -26,14 +26,31 @@ describe('peeps', async() => {
     // work on this area later
     test('Out put all Peeps inside the database', async() =>{
         Media = new soicalMedia  
-        await Media.connect()   
-        // await was taken from here
-        Media.newChitter('This is my first message in JS', 1) 
-        Media.newChitter('Working with express this time', 2)  
-        Media.newChitter('Working out how to use SQL in JS', 3)   
+        await Media.connect()    
+
+        const test = new Client({
+            "port": 5432, 
+            "database": "chitter_js_test"
+        }); 
+
+        let client = test 
+        await client.connect() 
+        await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', ['This is my first message in JS', 1]) 
+        await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', ['Working with express this time', 2]) 
+        await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', ['Working out how to use SQL in JS', 3])
+
         const result = await Media.allChitter()  
         expect( result.map((item) => (item.message))).toEqual(['This is my first message in JS', 'Working with express this time', 'Working out how to use SQL in JS']) 
-    }) 
+    })  
+
+    test('rase an err if an object gets passest though the funaction', async() => {
+        Media = new soicalMedia 
+        try {
+            await Media.allChitter()
+        } catch(e) {
+            expect(e).toBe([])
+        }
+    })
 
     test('adding a new peep to Chitter', async() => {
         Media = new soicalMedia 
@@ -49,9 +66,11 @@ describe('peeps', async() => {
         expect( result.map((item) => (item.message))).toEqual(["Working with express this time", "Working out how to use SQL in JS", "Testing my app with Jest and Jasmine"])
     }) 
 
-    // test('rase an error create new peep when id is missing', async() => { 
+    // test('rase an error create new peep when id is missing', async() => {  
+
     //     Media = new soicalMedia 
-    //     expect(await Media.allChitter('hi')).toBe([])
+    //     await expect(Media.allChitter()).resolves.toEqual([])
+
     // }) 
 
     test('raise error if chitter delete has the wrong input', async() => {
@@ -119,7 +138,17 @@ describe('Chitter login and logging to profile', async() => {
         Media = new soicalMedia  
         expect(await Media.logging_in('not_me', '123Build*')).toEqual('error')
         expect(await Media.logging_in('Jo_heart', '123')).toEqual('error')
-    })  
+    })   
+
+    test('rasing logging error', async() => {
+        try{ 
+            Media = new soicalMedia  
+            await Media.logging_in(null, null)
+        } catch(e) {
+            expect(e).toBe(false)
+        }
+        
+    })
 
 })
 

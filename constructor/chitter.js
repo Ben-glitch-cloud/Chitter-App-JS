@@ -49,7 +49,6 @@ class soicalMedia {
         catch(e) {
             return []; 
         }
-
     }  
 
     async newChitter(peep, id) {  
