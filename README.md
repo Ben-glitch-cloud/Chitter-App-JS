@@ -10,13 +10,24 @@
 <p align="center"><img src="https://img.shields.io/badge/-HTML5-black?logo=HTML5&logoColor=blue"> <img src="https://img.shields.io/badge/-CSS3-black?logo=CSS3&logoColor=orange"> <img src="https://img.shields.io/badge/-ejs-black?logo=PowerShell&logoColor=green"> </p> 
 
 <h3 align="center">Back End</h3>
-<p align="center"> <img src="https://img.shields.io/badge/-Node.js-black?logo=Node&logoColor=yellow"> </p> 
+<p align="center"> <img src="https://img.shields.io/badge/-Node.js-black?logo=Node&logoColor=yellow"> </p>  
 
-<h3 align="center">Database</h3> 
+<h3 align="center">Middleware</h3>
+<p align="center"> <img src="https://img.shields.io/badge/-Express-black?logo=Express&logoColor=white"> </p>  
+
+<h3 align="center">Database</h3>  
+<p align="center"><img src="https://img.shields.io/badge/-PostgreSQL-black?logo=PostgreSQL&logoColor=lightgrey"></p>
 
 <h3 align="center">Testing</h3> 
+<p align="center"><img src="https://img.shields.io/badge/-Jest-black?logo=Jest&logoColor=hotpink"></p>
 
 <h3 align="center">API</h3>
+<p align="center"><img src="https://img.shields.io/badge/-SendGrid-black?logo=Minutemailer&logoColor=blue"></p>
+
+
+<h2>How to set up?</h2> 
+
+
 
 <h2>User Stors</h2> 
 
