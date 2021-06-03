@@ -3,11 +3,14 @@
 <p align="center"><img width="30%" src="https://user-images.githubusercontent.com/71974361/120532902-18b80f00-c3d8-11eb-8cbd-f015180b17b1.gif"></img></p>
 
 <p align="center">This project is a clone of twitter called Chitter with the intention of building a web application with Node.js, Express and ejs. With Chitter you are able to create a profile to post peep's or delete them when ever you feel like. Moreover, if you post a peep with anothers user's name it will send an email to them.</p>  
-
+</br> 
+</br>
+</br>
 <p align="center"><img width="70%" src="https://user-images.githubusercontent.com/71974361/120712720-e9c59a00-c4b8-11eb-95c0-463550cfdbeb.png"></p> 
 
 <p align="center"><img width="70%" src="https://user-images.githubusercontent.com/71974361/120712968-37420700-c4b9-11eb-8a39-4c829ce2b9ef.png"></p>
-
+</br>
+</br>
 <h2 align="center">Tech Stack</h2>
 
 <h3 align="center">Front End</h3>
