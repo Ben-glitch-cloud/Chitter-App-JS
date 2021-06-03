@@ -54,8 +54,7 @@ class soicalMedia {
     async newChitter(peep, id) {  
         try{ 
             await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', [peep, id])    
-            // this is the email method 
-            // await Media.email(peep) 
+            await Media.email(peep) 
             return true
         }
         catch(e) { 
@@ -107,52 +106,50 @@ class soicalMedia {
         }
     } 
  
-    // async email(peep) { 
-    //     // for some resion async doesent work in this funaction
-    //     try {
-    //         peep.split(' ').forEach(async item => {
-    //             if (item.includes('@')) { 
-    //                 const email = await client.query('SELECT email FROM chitter_profile WHERE name = $1', [item.substring(1)])   
-    //                 await Media.send_email(email.rows)    
-    //                 return true
-    //             }  
-    //         }) 
-    //     }
-    //     catch(e) {
-    //         console.log(e) 
-    //         return false
-    //     } 
-    // }   
+    async email(peep) { 
+        // for some resion async doesent work in this funaction
+        try {
+            peep.split(' ').forEach(async item => {
+                if (item.includes('@')) { 
+                    const email = await client.query('SELECT email FROM chitter_profile WHERE name = $1', [item.substring(1)])   
+                    await Media.send_email(email.rows)    
+                    return true
+                }  
+            }) 
+        }
+        catch(e) {
+            console.log(e) 
+            return false
+        } 
+    }   
     
     
-    // async send_email(email) {
-    //     try {
-    //         console.log(email)  
-    //         console.log(process.env.SENDGRID_API_KEY) 
-    //         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-    //         const msg = { 
-    //             // email address
-    //             to: '', 
-    //             from: '',
-    //             subject: 'Someone is talking about you on chitter',
-    //             text: "Login in to chitter and see who's talking about",
-    //             html: '<strong>and easy to do anywhere, even with Node.js</strong>', 
-    //         } 
-    //         sgMail
-    //         .send(msg)
-    //         .then(() => {
-    //         console.log('Email sent')
-    //         }) 
-    //         .catch((error) => {
-    //             console.error(error.response.body)
-    //         }) 
-    //         return true  
-    //     } 
-    //     catch(e) {
-    //         console.log(e) 
-    //         return false
-    //     }
-    // }
+    async send_email(email) {
+        try {
+            console.log(email)  
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+            const msg = { 
+                to: '', 
+                from: '',
+                subject: 'Someone is talking about you on chitter',
+                text: "Login in to chitter and see who's talking about",
+                html: "<strong><p>You have been tagged in some one's Peep, sign in to have a look!</p></strong>", 
+            } 
+            sgMail
+            .send(msg)
+            .then(() => {
+            console.log('Email sent')
+            }) 
+            .catch((error) => {
+                console.error(error.response.body)
+            }) 
+            return true  
+        } 
+        catch(e) {
+            console.log(e) 
+            return false
+        }
+    }
 
 
 }  

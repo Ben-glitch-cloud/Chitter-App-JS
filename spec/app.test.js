@@ -148,6 +148,15 @@ describe('Chitter login and logging to profile', async() => {
             expect(e).toBe(false)
         }
         
+    }) 
+
+    describe('should send an email to the user', async() => {
+        test('check for a user in the peep', async() => {
+            Media = new soicalMedia 
+            let peep = '@Cat hello world'
+            const result = await Media.email(peep) 
+            console.log(result)
+        })
     })
 
 })
