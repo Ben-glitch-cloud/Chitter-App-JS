@@ -2,7 +2,42 @@
 
 <p align="center"><img width="30%" src="https://user-images.githubusercontent.com/71974361/120532902-18b80f00-c3d8-11eb-8cbd-f015180b17b1.gif"></img></p>
 
-<p align="center">More info coming soon to the project</p>
+<p align="center">This project is a clone of twitter called Chitter with the intention of building a web application with Node.js, Express and ejs. With Chitter you are able to create a profile to post peep's or delete them when ever you feel like. Moreover, if you post a peep with anothers user's name it will send an email to them.</p>  
+</br> 
+</br>
+</br>
+<p align="center"><img width="70%" src="https://user-images.githubusercontent.com/71974361/120712720-e9c59a00-c4b8-11eb-95c0-463550cfdbeb.png"></p> 
+
+<p align="center"><img width="70%" src="https://user-images.githubusercontent.com/71974361/120712968-37420700-c4b9-11eb-8a39-4c829ce2b9ef.png"></p>
+</br>
+</br>
+<h2 align="center">Tech Stack</h2>
+
+<h3 align="center">Front End</h3>
+<p align="center"><img src="https://img.shields.io/badge/-HTML5-black?logo=HTML5&logoColor=blue"> <img src="https://img.shields.io/badge/-CSS3-black?logo=CSS3&logoColor=orange"> <img src="https://img.shields.io/badge/-ejs-black?logo=PowerShell&logoColor=green"> </p> 
+
+<h3 align="center">Back End</h3>
+<p align="center"> <img src="https://img.shields.io/badge/-Node.js-black?logo=Node&logoColor=yellow"> </p>  
+
+<h3 align="center">Middleware</h3>
+<p align="center"> <img src="https://img.shields.io/badge/-Express-black?logo=Express&logoColor=white"> </p>  
+
+<h3 align="center">Dependencies</h3> 
+<p align="center"> <img src="https://img.shields.io/badge/-sendgridemail-black?logo=npm&logoColor=red"> <img src="https://img.shields.io/badge/-nodemon-black?logo=npm&logoColor=orange"> <img src="https://img.shields.io/badge/-supertest-black?logo=npm&logoColor=yellow"> <img src="https://img.shields.io/badge/-express session-black?logo=npm&logoColor=green"> </p>  
+
+<h3 align="center">Database</h3>  
+<p align="center"><img src="https://img.shields.io/badge/-PostgreSQL-black?logo=PostgreSQL&logoColor=lightgrey"></p>
+
+<h3 align="center">Testing</h3> 
+<p align="center"><img src="https://img.shields.io/badge/-Jest-black?logo=Jest&logoColor=hotpink"></p>
+
+<h3 align="center">API</h3>
+<p align="center"><img src="https://img.shields.io/badge/-SendGrid-black?logo=Minutemailer&logoColor=blue"></p>
+
+
+<h2>How to set up?</h2> 
+
+
 
 <h2>User Stors</h2> 
 
