@@ -37,7 +37,8 @@ class soicalMedia {
             } 
         } 
         catch(e) {
-            console.log(`Failed to connect ${e}`)
+            console.log(`Failed to connect ${e}`) 
+            return false 
         }
     }
 
@@ -54,7 +55,7 @@ class soicalMedia {
     async newChitter(peep, id) {  
         try{ 
             await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', [peep, id])    
-            await Media.email(peep) 
+            await Media.email(peep, id) 
             return true
         }
         catch(e) { 
@@ -106,34 +107,40 @@ class soicalMedia {
         }
     } 
  
-    async email(peep) { 
-        // for some resion async doesent work in this funaction
+    async email(peep, id) { 
+        // for some resion async doesent work in this funaction 
+        console.log(id)
         try {
             peep.split(' ').forEach(async item => {
                 if (item.includes('@')) { 
-                    const email = await client.query('SELECT email FROM chitter_profile WHERE name = $1', [item.substring(1)])   
-                    await Media.send_email(email.rows)    
-                    return true
-                }  
-            }) 
+                    const email_to = await client.query('SELECT email FROM chitter_profile WHERE name = $1', [item.substring(1)])   
+                    const email_from = await client.query('SELECT email FROM chitter_profile WHERE profile_id = $1', [id])
+                    await Media.send_email(email_to.rows, email_from)     
+                }   
+            })  
+            return true
         }
         catch(e) {
-            console.log(e) 
             return false
         } 
     }   
     
     
-    async send_email(email) {
-        try {
+    async send_email(email_to, email_from) {
+        try { 
             console.log(email)  
             sgMail.setApiKey(process.env.SENDGRID_API_KEY)
             const msg = { 
-                to: '', 
-                from: '',
+                to: email_to, 
+                from: email_from,
                 subject: 'Someone is talking about you on chitter',
                 text: "Login in to chitter and see who's talking about",
-                html: "<strong><p>You have been tagged in some one's Peep, sign in to have a look!</p></strong>", 
+                html: "<strong><p>You have been tagged in some one's Peep, sign in to have a look!</p></strong>",  
+                mail_settings: {
+                    sandbox_mode: {
+                        enable: process.env.NODE_ENV === 'test',
+                    },
+                }
             } 
             sgMail
             .send(msg)
@@ -143,10 +150,8 @@ class soicalMedia {
             .catch((error) => {
                 console.error(error.response.body)
             }) 
-            return true  
         } 
         catch(e) {
-            console.log(e) 
             return false
         }
     }

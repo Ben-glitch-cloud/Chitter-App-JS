@@ -1,8 +1,10 @@
-// import { response } from 'express'
-// import supertest from 'supertest' 
-// import app from '../app.js'    
 
 
+jest.setTimeout(15000); 
+
+jest.mock('@sendgrid/mail');
+const sgMail = require('@sendgrid/mail');
+const defaultMailOptions = { response: 'Okay' };
 
 const {Client} = require('pg')   
 
@@ -12,32 +14,38 @@ set_database
 
 const soicalMedia = require('../constructor/chitter')   
 
+beforeAll(() => {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+}); 
+
+beforeEach(() => {
+    global.mockMailer = (options=defaultMailOptions) => {
+      return sgMail.sendMultiple.mockImplementation(() => Promise.resolve(options));
+    };
+});
+
+afterEach(() => {
+    jest.clearAllMocks();
+}); 
+
+
 
 describe('connecting to test database', async() => {
     test('in application', async() => {
         Media = new soicalMedia   
         expect( await Media.start() ).toBe(true)
-    })
+    }) 
 })
 
 
 describe('peeps', async() => {
 
-    // work on this area later
     test('Out put all Peeps inside the database', async() =>{
-        Media = new soicalMedia  
-        await Media.connect()    
+        Media = new soicalMedia    
 
-        const test = new Client({
-            "port": 5432, 
-            "database": "chitter_js_test"
-        }); 
-
-        let client = test 
-        await client.connect() 
-        await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', ['This is my first message in JS', 1]) 
-        await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', ['Working with express this time', 2]) 
-        await client.query('INSERT INTO chitter_messages (user_id, message, created_on, chitter_profile) VALUES(DEFAULT, $1, current_timestamp, $2)', ['Working out how to use SQL in JS', 3])
+        await Media.newChitter('This is my first message in JS', 1)  
+        await Media.newChitter('Working with express this time', 2) 
+        await Media.newChitter('Working out how to use SQL in JS', 3)
 
         const result = await Media.allChitter()  
         expect( result.map((item) => (item.message))).toEqual(['This is my first message in JS', 'Working with express this time', 'Working out how to use SQL in JS']) 
@@ -109,7 +117,12 @@ describe('Chitter login and logging to profile', async() => {
         expect(chitter_accounts.map((item) => item.name)).toEqual(['Jo_heart', 'Tom_scott', 'you_found'])
         expect(chitter_accounts.map((item) => item.email)).toEqual(['Jo_heart@gmail.com', 'Tome_scote@gmail.com', 'me@gmail.com'])
         expect(chitter_accounts.map((item) => item.password)).toEqual(['123Build*', 'happy_me_123', 'well_done_123'])
-    }) 
+    })  
+
+    // test('rase error if login is wrong', async() => {
+    //     Media = new soicalMedia 
+    //     expect(await Media.logging_in()).toBe(false)
+    // })
 
     test('rase error if chitter input is wrong', async() => {
         Media = new soicalMedia  
@@ -148,14 +161,34 @@ describe('Chitter login and logging to profile', async() => {
             expect(e).toBe(false)
         }
         
-    }) 
+    })  
 
-    describe('should send an email to the user', async() => {
+    describe('should send an email to the user', async() => { 
+
+        test('checking emails for use names', async() => {
+            Media = new soicalMedia 
+            let peep = '@Cat hello world'  
+            let id = 3
+            expect(await Media.email(peep, id)).toEqual(true)
+        }) 
+
         test('check for a user in the peep', async() => {
             Media = new soicalMedia 
-            let peep = '@Cat hello world'
-            const result = await Media.email(peep) 
-            console.log(result)
+            let email_to = 'me@gmail.com'
+            let email_from = 'Tome_scote@gmail.com'
+            expect(await Media.send_email(email_to, email_from)).toBe(false)
+        })
+
+        test('error raised when the wrong object was sent through', async() => {
+            Media = new soicalMedia  
+            expect(await Media.email(peep = {}, id = {})).toBe(false)
+        })
+
+        test('check for a user in the peep', async() => {
+            Media = new soicalMedia 
+            let email_to = 'me@gmail.com'
+            let email_from = 'Tome_scote@gmail.com'
+            expect(await Media.send_email({}, {})).toBe(false)
         })
     })
 
