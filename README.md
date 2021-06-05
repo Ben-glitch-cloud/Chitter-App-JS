@@ -35,8 +35,26 @@
 <p align="center"><img src="https://img.shields.io/badge/-SendGrid-black?logo=Minutemailer&logoColor=blue"></p>
 
 
-<h2>How to set up?</h2> 
+<h2>How to get setup?</h2> 
 
+<p>1. First Fork the repo</p>  
+
+<p>2. Copy the the project to a Directory</p> 
+
+<p>3. Create the database's from the models file<p> 
+  
+<p>4. Run the test's using this command.</p>  
+
+```
+$ npm run test     
+``` 
+<p>5. If all the test's pass then run the app.</p> 
+
+```  
+$ npm run devStart        
+``` 
+
+<p>✅All Done👏</p>
 
 
 <h2>User Stors</h2> 
