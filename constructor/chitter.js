@@ -37,7 +37,8 @@ class soicalMedia {
             } 
         } 
         catch(e) {
-            console.log(`Failed to connect ${e}`) 
+            console.log(`Failed to connect ${e}`)  
+            console.log('Try restating the web application')
             return false 
         }
     }
