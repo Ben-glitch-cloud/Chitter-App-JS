@@ -53,6 +53,10 @@ $ npm run test
 ```  
 $ npm run devStart        
 ``` 
+</br>   
+<p>5a. The email application for Chitter will not work with out an account to <i>Sendgrid</i>, though this is optional 🧑‍💻.</p> 
+<a href="https://sendgrid.com/">SendGrid📧</a>
+</br> 
 </br>
 <p>✅All Done👏</p>
 
