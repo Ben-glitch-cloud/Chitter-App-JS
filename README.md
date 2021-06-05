@@ -14,16 +14,16 @@
 <h2 align="center">Tech Stack</h2>
 
 <h3 align="center">Front End</h3>
-<p align="center"><img src="https://img.shields.io/badge/-HTML5-black?logo=HTML5&logoColor=blue"> <img src="https://img.shields.io/badge/-CSS3-black?logo=CSS3&logoColor=orange"> <img src="https://img.shields.io/badge/-ejs-black?logo=PowerShell&logoColor=green"> </p> 
+<p align="center"><img src="https://img.shields.io/badge/-HTML5-black?logo=HTML5&logoColor=blue"> <img src="https://img.shields.io/badge/-CSS3-black?logo=CSS3&logoColor=red"> <img src="https://img.shields.io/badge/-ejs-black?logo=PowerShell&logoColor=green"> </p> 
 
 <h3 align="center">Back End</h3>
-<p align="center"> <img src="https://img.shields.io/badge/-Node.js-black?logo=Node&logoColor=yellow"> </p>  
+<p align="center"> <img src="https://img.shields.io/badge/-Node.js-black?logo=Node.js&logoColor=yellow"> </p>  
 
 <h3 align="center">Middleware</h3>
 <p align="center"> <img src="https://img.shields.io/badge/-Express-black?logo=Express&logoColor=white"> </p>  
 
 <h3 align="center">Dependencies</h3> 
-<p align="center"> <img src="https://img.shields.io/badge/-sendgridemail-black?logo=npm&logoColor=red"> <img src="https://img.shields.io/badge/-nodemon-black?logo=npm&logoColor=orange"> <img src="https://img.shields.io/badge/-supertest-black?logo=npm&logoColor=yellow"> <img src="https://img.shields.io/badge/-express session-black?logo=npm&logoColor=green"> </p>  
+<p align="center"> <img src="https://img.shields.io/badge/-Nodemon-black?logo=Nodemon&logoColor=green"> <img src="https://img.shields.io/badge/-supertest-black?logo=npm&logoColor=red"> <img src="https://img.shields.io/badge/-express session-black?logo=npm&logoColor=orang"> <img src="https://img.shields.io/badge/-sendgrid/mail-black?logo=npm&logoColor=red">  </p>  
 
 <h3 align="center">Database</h3>  
 <p align="center"><img src="https://img.shields.io/badge/-PostgreSQL-black?logo=PostgreSQL&logoColor=lightgrey"></p>
