@@ -72,7 +72,6 @@ class soicalMedia {
             return true
         } 
         catch(e){ 
-            // console.log(e)
             return false; 
         }
     } 
