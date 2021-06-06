@@ -36,13 +36,13 @@
 
 
 <h2>How to get setup?</h2> 
-
+</br>
 <p>1. First Fork the repo</p>  
-
+</br>
 <p>2. Copy the the project to a Directory</p> 
-
+</br>
 <p>3. Create the database's from the models file<p> 
-  
+</br>
 <p>4. Run the test's using this command.</p>  
 
 ```
@@ -53,7 +53,11 @@ $ npm run test
 ```  
 $ npm run devStart        
 ``` 
-
+</br>   
+<p>5a. The email application for Chitter will not work with out an account to <i>Sendgrid</i>, though this is optional 🧑‍💻.</p> 
+<a href="https://sendgrid.com/">SendGrid📧</a>
+</br> 
+</br>
 <p>✅All Done👏</p>
 
 
